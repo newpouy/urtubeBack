@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var User=require('../models/User');
+var Tube=require('../models/Tube');
 
-router.get('/:userId?',function(req,res,next){
-  if(req.params.userId){
-    User.getUserById(req.params.userId,function(err,rows){
+router.get('/:tubeId?',function(req,res,next){
+  if(req.params.tubeId){
+    Tube.getTubeById(req.params.tubeId,function(err,rows){
       if(err){
           res.json(err);
       }else{
@@ -12,7 +12,7 @@ router.get('/:userId?',function(req,res,next){
       }
     });
   }else{
-    User.getAllUsers(function(err,rows){
+    Tube.getAllTubes(function(err,rows){
       if(err){
           res.json(err);
       }else{
@@ -23,7 +23,7 @@ router.get('/:userId?',function(req,res,next){
 });
 
 router.post('/',function(req,res,next){
-  User.addUser(req.body,function(err,count){
+  Tube.addTube(req.body,function(err,count){
     if(err){
         res.json(err);
     }else{
@@ -32,8 +32,8 @@ router.post('/',function(req,res,next){
   });
 });
 
-router.post('/:userId',function(req,res,next){
-  User.deleteAll(req.body,function(err,count){
+router.post('/:tubeId',function(req,res,next){
+  Tube.deleteAll(req.body,function(err,count){
     if(err){
       res.json(err);
     }else{
@@ -42,8 +42,8 @@ router.post('/:userId',function(req,res,next){
   });
 });
 
-router.delete('/:userId',function(req,res,next){
-  User.deleteUser(req.params.userId,function(err,count){
+router.delete('/:tubeId',function(req,res,next){
+  Tube.deleteTube(req.params.tubeId,function(err,count){
     if(err){
         res.json(err);
     }else{
@@ -52,8 +52,8 @@ router.delete('/:userId',function(req,res,next){
   });
 });
 
-router.put('/:userId',function(req,res,next){
-  User.updateUser(req.params.userId,req.body,function(err,rows){
+router.put('/:tubeId',function(req,res,next){
+  Tube.updateTube(req.params.tubeId,req.body,function(err,rows){
     if(err){
       res.json(err);
     }else{
