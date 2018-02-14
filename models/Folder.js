@@ -11,7 +11,7 @@ getFolderById:function(id,callback){
 addFolder:function(folder,callback){
    // console.log(folder.Id);
   return db.query(
-    "Insert into folder values(?,?,?,?,?,now())",
+    "Insert into folder values(?,?,?,?,?,now(),null)",
     [folder.folderId,folder.userId,folder.folderTitle,
       folder.folderDescription,folder.folderTypeId],
     callback);
@@ -21,7 +21,7 @@ deleteFolder:function(id,callback){
     return db.query("delete from folder where Id=?",[id],callback);
 },
 updateFolder:function(id,folder,callback){
-    return  db.query("update folder set Title=?,Status=? where Id=?",[Folder.Title,Folder.Status,id],callback);
+    return  db.query("update folder set folderTitle = ?, updateDate = now() where folderId = ?",[folder.folderTitle,id],callback);
 },
 deleteAll:function(item,callback){
   var delarr=[];
